@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduStream | Premium Interactive E-Learning Platform</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/style.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Wait, the default Bootstrap URL doesn't have style.css, it has bootstrap.min.css. Let's fix that standard link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome Free Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- --- Header Navigation (Glassmorphic & Sticky) --- -->
+    <header class="sticky top-0 z-40 w-full glass-panel border-b transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <nav class="navbar navbar-expand-lg py-3">
+                <div class="container-fluid p-0 d-flex justify-content-between align-items-center">
+                    <!-- Brand Logo -->
+                    <a class="navbar-brand m-0 d-flex align-items-center gap-2" href="#" onclick="navigateTo('home')">
+                        <div class="w-10 h-10 rounded-xl gradient-bg d-flex align-items-center justify-content-center text-white shadow-md">
+                            <i class="fa-solid fa-graduation-cap text-lg"></i>
+                        </div>
+                        <span class="text-xl font-black tracking-tight text-indigo-600 dark:text-indigo-400">EduStream</span>
+                    </a>
+
+                    <!-- Navigation Links & Search & Action Controls -->
+                    <div class="d-flex align-items-center gap-4 order-lg-3">
+                        <!-- Theme Switcher Button -->
+                        <button class="theme-toggle-btn text-slate-600 dark:text-slate-300" onclick="toggleTheme()" aria-label="Toggle Dark Mode">
+                            <i id="theme-icon" class="fa-solid fa-moon"></i>
+                        </button>
+
+                        <!-- Dashboard Shortcut Button (Direct to Active Study) -->
+                        <button class="btn btn-primary d-none d-md-flex align-items-center gap-2 rounded-xl px-4 py-2 font-bold text-xs shadow-md border-0 gradient-bg hover:opacity-90" onclick="navigateTo('dashboard')">
+                            <i class="fa-solid fa-chalkboard-user"></i> My Dashboard
+                        </button>
+
+                        <!-- Mobile Hamburger Button -->
+                        <button class="navbar-toggler border-0 p-1 focus:outline-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fa-solid fa-bars text-xl text-slate-600 dark:text-slate-300"></i>
+                        </button>
+                    </div>
+
+                    <!-- Main Navigation Links -->
+                    <div class="collapse navbar-collapse order-lg-2 justify-content-center" id="navbarNav">
+                        <ul class="navbar-nav gap-2 py-3 py-lg-0 align-items-lg-center">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link-custom active" data-view="home" onclick="navigateTo('home')">
+                                    <i class="fa-solid fa-house text-xs me-1"></i> Home
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link-custom" data-view="courses" onclick="navigateTo('courses')">
+                                    <i class="fa-solid fa-compass text-xs me-1"></i> Browse Courses
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link-custom" data-view="dashboard" onclick="navigateTo('dashboard')">
+                                    <i class="fa-solid fa-chart-line text-xs me-1"></i> Dashboard
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- --- Main Content View Areas --- -->
+    <main class="flex-grow">
+        
+        <!-- ================= HOME / LANDING VIEW ================= -->
+        <section id="home-view" class="tab-pane active-view">
+            <!-- Hero Banner -->
+            <div class="container mx-auto px-4 py-16 md:py-24 relative">
+                <!-- Decorative Glow Shapes -->
+                <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-indigo-400/20 dark:bg-indigo-600/10 rounded-full blur-3xl -z-10 animate-pulse"></div>
+                <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-400/20 dark:bg-purple-600/10 rounded-full blur-3xl -z-10"></div>
+                
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6 text-left">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 border border-indigo-500/10 mb-4 animate-bounce">
+                            <i class="fa-solid fa-rocket"></i> Master Real-world Tech Skills
+                        </span>
+                        
+                        <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-none mb-4">
+                            Learn Without Limits.<br>
+                            Build with <span class="gradient-text">Confidence.</span>
+                        </h1>
+                        
+                        <p class="text-sm md:text-base text-slate-500 dark:text-slate-400 leading-relaxed mb-8 max-w-xl">
+                            Unlock high-quality, practical courses in Web Development, Machine Learning, UI/UX, and Marketing. Get interactive code checkpoints, custom quizzes, and verified issue certificates.
+                        </p>
+
+                        <!-- Hero Interactive Search Input -->
+                        <div class="glass-panel p-2 rounded-2xl max-w-lg shadow-lg d-flex align-items-center gap-2 border border-indigo-500/15 mb-4">
+                            <div class="ps-3 text-slate-400">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                            <input type="text" id="home-hero-search" placeholder="What skill do you want to learn today?" class="form-control bg-transparent border-0 focus:shadow-none text-sm py-2 px-1 text-slate-800 dark:text-slate-100 flex-grow placeholder-slate-400">
+                            <button class="btn btn-primary rounded-xl px-4 py-2 font-bold text-xs shadow-md border-0 gradient-bg hover:opacity-90" onclick="const val = document.getElementById('home-hero-search').value; state.searchQuery = val; document.getElementById('catalog-search').value = val; navigateTo('courses');">
+                                Explore
+                            </button>
+                        </div>
+                        
+                        <div class="text-xxs text-slate-400 ps-1">
+                            Popular: <a href="#" class="underline hover:text-indigo-500" onclick="state.searchQuery='python'; document.getElementById('catalog-search').value='python'; navigateTo('courses');">Python</a>, 
+                            <a href="#" class="underline hover:text-indigo-500" onclick="state.searchQuery='figma'; document.getElementById('catalog-search').value='figma'; navigateTo('courses');">Figma</a>, 
+                            <a href="#" class="underline hover:text-indigo-500" onclick="state.searchQuery='full-stack'; document.getElementById('catalog-search').value='full-stack'; navigateTo('courses');">Full-Stack</a>
+                        </div>
+                    </div>
+
+                    <!-- Hero Graphic/Mockup -->
+                    <div class="col-lg-6 text-center">
+                        <div class="relative inline-block animate-float">
+                            <!-- Background elements -->
+                            <div class="absolute -inset-1.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-3xl blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                            
+                            <!-- Main Card mockup -->
+                            <div class="relative glass-panel p-4 rounded-3xl border shadow-2xl max-w-md mx-auto">
+                                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&auto=format&fit=crop&q=80" alt="Student Studying" class="w-full rounded-2xl object-cover h-64 mb-4 shadow-sm">
+                                
+                                <div class="text-left p-2">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="text-xxs font-bold text-slate-400">STUDY ROOM INSIGHTS</span>
+                                        <span class="badge bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xxs font-bold border border-emerald-500/20">LIVE STUDY</span>
+                                    </div>
+                                    <h3 class="text-sm font-bold leading-snug">Become a Professional React Developer in 2026</h3>
+                                    <div class="d-flex align-items-center gap-2 mt-3">
+                                        <div class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-950/40 d-flex align-items-center justify-content-center text-xs text-indigo-600 dark:text-indigo-400">
+                                            <i class="fa-solid fa-user-graduate"></i>
+                                        </div>
+                                        <div class="flex-grow">
+                                            <div class="progress" style="height: 4px; background-color: var(--border-color);">
+                                                <div class="progress-bar bg-indigo-600" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <span class="text-xxs font-bold">75% Complete</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Floating badge 1 -->
+                            <div class="absolute -top-6 -left-6 glass-card p-3 rounded-2xl shadow-lg border d-flex align-items-center gap-2.5 animate-bounce">
+                                <div class="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 d-flex align-items-center justify-content-center text-xs">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </div>
+                                <div class="text-left">
+                                    <p class="font-black text-xs m-0 leading-none">Passed Quiz</p>
+                                    <p class="text-xxs text-slate-400 m-0 leading-none">100% Score</p>
+                                </div>
+                            </div>
+
+                            <!-- Floating badge 2 -->
+                            <div class="absolute -bottom-4 -right-4 glass-card p-3 rounded-2xl shadow-lg border d-flex align-items-center gap-2.5">
+                                <div class="w-8 h-8 rounded-full bg-warning/10 text-warning d-flex align-items-center justify-content-center text-xs">
+                                    <i class="fa-solid fa-award"></i>
+                                </div>
+                                <div class="text-left">
+                                    <p class="font-black text-xs m-0 leading-none">Certificate Unlocked</p>
+                                    <p class="text-xxs text-slate-400 m-0 leading-none">Verifiable Credential</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Home Statistics Bar -->
+            <div class="bg-indigo-50/40 dark:bg-indigo-950/10 border-y border-slate-100 dark:border-slate-800/80 py-8">
+                <div class="container mx-auto px-4">
+                    <div class="row text-center g-4">
+                        <div class="col-md-3 col-6">
+                            <h3 class="text-3xl font-black tracking-tight gradient-text">6+</h3>
+                            <p class="text-xs font-semibold text-slate-500 mt-1">Premium Core Courses</p>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <h3 class="text-3xl font-black tracking-tight gradient-text">15,000+</h3>
+                            <p class="text-xs font-semibold text-slate-500 mt-1">Global Active Students</p>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <h3 class="text-3xl font-black tracking-tight gradient-text">4.9★</h3>
+                            <p class="text-xs font-semibold text-slate-500 mt-1">Syllabus Average Rating</p>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <h3 class="text-3xl font-black tracking-tight gradient-text">100%</h3>
+                            <p class="text-xs font-semibold text-slate-500 mt-1">Verifiable Credentials</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Courses Grid -->
+            <div class="container mx-auto px-4 py-16">
+                <div class="d-flex justify-content-between align-items-end mb-8 text-left">
+                    <div>
+                        <span class="text-xs font-black text-indigo-600 dark:text-indigo-400 tracking-wider uppercase">Handpicked For You</span>
+                        <h2 class="text-2xl md:text-3xl font-black tracking-tight mt-1">Our Most Popular Courses</h2>
+                    </div>
+                    <button class="btn btn-outline-primary rounded-xl px-4 py-2 font-bold text-xs" onclick="navigateTo('courses')">
+                        View All Courses <i class="fa-solid fa-arrow-right text-xxs ms-1"></i>
+                    </button>
+                </div>
+
+                <div class="row" id="featured-courses-container">
+                    <!-- Dynamic Featured Courses injected here -->
+                </div>
+            </div>
+
+            <!-- Interactive E-Learning Guide Banner -->
+            <div class="container mx-auto px-4 pb-16">
+                <div class="glass-panel p-5 rounded-3xl border relative overflow-hidden">
+                    <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-indigo-500/10 rounded-full blur-2xl"></div>
+                    <div class="row align-items-center g-4 text-left">
+                        <div class="col-lg-8">
+                            <h3 class="text-xl md:text-2xl font-black tracking-tight mb-2">How EduStream Interactive Learning Works</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-2xl m-0">
+                                Enrolling in a course unlocks a dedicated Study Room. You watch lectures, mark course modules complete using checklists, and take an integrated graduation exam. Perfect scores immediately generate verified digital credentials you can showcase.
+                            </p>
+                        </div>
+                        <div class="col-lg-4 text-lg-end">
+                            <button class="btn btn-primary rounded-xl px-5 py-3 font-bold text-xs shadow-md border-0 gradient-bg hover:opacity-90 w-full w-lg-auto" onclick="navigateTo('courses')">
+                                Browse The Catalog
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= COURSES CATALOG VIEW ================= -->
+        <section id="courses-view" class="tab-pane">
+            <div class="container mx-auto px-4 py-12">
+                
+                <!-- Catalog Header -->
+                <div class="text-center max-w-xl mx-auto mb-10">
+                    <h2 class="text-3xl font-black tracking-tight">Expand Your Knowledge Base</h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1.5">Search and refine from our database of curated interactive courses compiled by industry experts.</p>
+                </div>
+
+                <!-- Category Filtering Pill Bar -->
+                <div class="d-flex justify-content-center flex-wrap gap-2 mb-8">
+                    <button class="category-pill btn text-white rounded-full text-xs font-bold px-4 py-2 gradient-bg shadow-sm border-0" data-cat="All" onclick="setCategory('All')">
+                        All Subjects
+                    </button>
+                    <button class="category-pill btn text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-xs font-bold px-4 py-2 border-0" data-cat="Web Development" onclick="setCategory('Web Development')">
+                        Web Development
+                    </button>
+                    <button class="category-pill btn text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-xs font-bold px-4 py-2 border-0" data-cat="Data Science" onclick="setCategory('Data Science')">
+                        Data Science
+                    </button>
+                    <button class="category-pill btn text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-xs font-bold px-4 py-2 border-0" data-cat="Design" onclick="setCategory('Design')">
+                        UI/UX Design
+                    </button>
+                    <button class="category-pill btn text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-xs font-bold px-4 py-2 border-0" data-cat="Marketing" onclick="setCategory('Marketing')">
+                        Digital Marketing
+                    </button>
+                </div>
+
+                <div class="row align-items-start g-4">
+                    <!-- Filters Sidebar Panel -->
+                    <div class="col-lg-3">
+                        <div class="glass-panel p-4 rounded-2xl border text-left sticky top-28">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="text-sm font-black m-0"><i class="fa-solid fa-sliders text-xs me-1.5"></i> Filters</h5>
+                                <button class="text-xxs font-bold text-indigo-600 dark:text-indigo-400 hover:underline" onclick="clearFilters()">Reset All</button>
+                            </div>
+
+                            <!-- Search Input -->
+                            <div class="mb-4">
+                                <label class="text-xxs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Search Syllabus</label>
+                                <div class="glass-card p-1.5 rounded-xl border d-flex align-items-center gap-2">
+                                    <span class="ps-2 text-slate-400 text-xs"><i class="fa-solid fa-magnifying-glass"></i></span>
+                                    <input type="text" id="catalog-search" oninput="handleSearch(event)" placeholder="Search keywords..." class="form-control bg-transparent border-0 focus:shadow-none text-xs p-1 text-slate-800 dark:text-slate-100">
+                                </div>
+                            </div>
+
+                            <!-- Difficulty Checklist -->
+                            <div class="mb-4">
+                                <label class="text-xxs font-bold text-slate-400 uppercase tracking-wider block mb-2">Difficulty Level</label>
+                                <div class="d-flex flex-column gap-2 text-xs">
+                                    <label class="d-flex align-items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" class="difficulty-checkbox form-check-input accent-indigo-600" value="Beginner" onchange="toggleDifficulty('Beginner')">
+                                        <span>Beginner Track</span>
+                                    </label>
+                                    <label class="d-flex align-items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" class="difficulty-checkbox form-check-input accent-indigo-600" value="Intermediate" onchange="toggleDifficulty('Intermediate')">
+                                        <span>Intermediate Track</span>
+                                    </label>
+                                    <label class="d-flex align-items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" class="difficulty-checkbox form-check-input accent-indigo-600" value="Advanced" onchange="toggleDifficulty('Advanced')">
+                                        <span>Advanced Track</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Sort Options -->
+                            <div class="mb-2">
+                                <label class="text-xxs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Sort Course Catalog</label>
+                                <select id="catalog-sort" onchange="handleSortChange(event)" class="form-select text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent text-slate-800 dark:text-slate-100 p-2">
+                                    <option value="rating">Popular & Top Rated</option>
+                                    <option value="price-low">Price: Low to High</option>
+                                    <option value="price-high">Price: High to Low</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Catalog Course Grid Area -->
+                    <div class="col-lg-9">
+                        <div class="row" id="courses-catalog-container">
+                            <!-- Dynamic Course List injected here -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= STUDENT DASHBOARD VIEW ================= -->
+        <section id="dashboard-view" class="tab-pane">
+            <div class="container mx-auto px-4 py-12 text-left">
+                
+                <!-- Dashboard Welcome Header -->
+                <div class="glass-panel p-4 md:p-5 rounded-3xl border d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-4 mb-8">
+                    <div class="d-flex align-items-center gap-4">
+                        <div class="w-16 h-16 rounded-2xl gradient-bg d-flex align-items-center justify-content-center text-white text-2xl shadow-md">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <div>
+                            <span class="text-xxs font-bold text-indigo-600 dark:text-indigo-400 tracking-wide uppercase">Active Student Portal</span>
+                            <h2 class="text-xl md:text-2xl font-black tracking-tight mt-0.5">Welcome Back, <span id="profile-name-display">Learner</span>!</h2>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 m-0">Learning Target: <b id="profile-goal-display" class="text-slate-700 dark:text-slate-300">Web Developer</b></p>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-secondary rounded-xl px-4 py-2 font-bold text-xs d-flex align-items-center gap-2" data-bs-toggle="collapse" data-bs-target="#profileSettingsPanel">
+                        <i class="fa-solid fa-user-gear"></i> Edit Learning Profile
+                    </button>
+                </div>
+
+                <!-- Collapsible Settings Panel -->
+                <div class="collapse mb-8" id="profileSettingsPanel">
+                    <div class="glass-panel p-4 rounded-2xl border">
+                        <h5 class="text-sm font-black mb-3"><i class="fa-solid fa-user-pen text-xs me-1.5"></i> Update Profile Details</h5>
+                        <form class="row g-3 align-items-end" onsubmit="saveProfile(event)">
+                            <div class="col-md-5">
+                                <label class="text-xxs font-bold text-slate-400 uppercase tracking-wider block mb-1">Your Full Name</label>
+                                <input type="text" id="input-profile-name" class="form-control text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent py-2.5 px-3" required>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="text-xxs font-bold text-slate-400 uppercase tracking-wider block mb-1">Your Career/Learning Goal</label>
+                                <input type="text" id="input-profile-goal" class="form-control text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent py-2.5 px-3" placeholder="e.g. Full-Stack Dev, Data Scientist" required>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary rounded-xl w-full py-2.5 font-bold text-xs border-0 gradient-bg">Save Profile</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Academic Metrics Stats Row -->
+                <div class="row mb-8" id="dashboard-stats-grid">
+                    <!-- Dynamic statistics injected here -->
+                </div>
+
+                <!-- Dashboard Double Section (Active Syllabus & Certificates) -->
+                <div class="row g-4">
+                    <!-- Left Section: Current Learning syllabus -->
+                    <div class="col-lg-8">
+                        <h4 class="text-base font-black mb-4"><i class="fa-solid fa-book-bookmark text-xs me-2"></i> Current Enrolled Syllabuses</h4>
+                        <div class="row" id="active-courses-grid">
+                            <!-- Dynamic Active Course Cards injected here -->
+                        </div>
+                    </div>
+
+                    <!-- Right Section: Credentials list -->
+                    <div class="col-lg-4">
+                        <h4 class="text-base font-black mb-4"><i class="fa-solid fa-ribbon text-xs me-2"></i> Graduation Credentials</h4>
+                        <div class="row" id="certificates-grid">
+                            <!-- Dynamic certificates injected here -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= STUDY ROOM / VIDEO PLAYER VIEW ================= -->
+        <section id="player-view" class="tab-pane">
+            <div class="container mx-auto px-4 py-8 text-left">
+                
+                <!-- Player Header / Back button -->
+                <div class="d-flex align-items-center justify-content-between mb-6 pb-4 border-b border-slate-100 dark:border-slate-800">
+                    <button class="btn btn-outline-secondary rounded-xl px-3.5 py-2 font-bold text-xs d-flex align-items-center gap-1.5" onclick="navigateTo('dashboard')">
+                        <i class="fa-solid fa-arrow-left-long"></i> Back to Dashboard
+                    </button>
+                    <div class="text-right">
+                        <span id="player-course-category" class="text-xxs font-bold text-indigo-600 dark:text-indigo-400 tracking-widest uppercase">WEB DEV</span>
+                        <h2 id="player-course-title" class="text-sm md:text-base font-black mt-0.5 leading-tight">Interactive Course Title Placeholder</h2>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Video Lectures Screen and Description -->
+                    <div class="col-lg-8">
+                        <!-- Simulated Video Screen Box -->
+                        <div class="glass-card rounded-2xl overflow-hidden aspect-video relative shadow-lg" id="player-video-placeholder">
+                            <!-- Dynamic Video Player rendering loaded here -->
+                        </div>
+
+                        <!-- Lecture Meta Info -->
+                        <div class="mt-4 p-4 glass-panel rounded-2xl border">
+                            <span class="badge bg-indigo-600 text-white text-xxs font-bold px-2 py-1 rounded-md mb-2">NOW PLAYING</span>
+                            <h4 id="player-video-lesson-title" class="text-base font-black mt-0.5 leading-tight">Introduction to standard Web Layouts</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                                Complete this video lesson using the player simulation and check its matching checklist item in the playlist column. Progress tracking is stored directly to local storage to ensure checkpoint completion.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Syllabus Checklist & Graduation Checkpoints -->
+                    <div class="col-lg-4">
+                        <!-- Syllabus Playlist -->
+                        <div class="glass-panel p-4 rounded-2xl border mb-4">
+                            <h5 class="text-sm font-black mb-3"><i class="fa-solid fa-list-check text-xs me-1.5"></i> Course Syllabus Playlist</h5>
+                            <div class="overflow-y-auto pr-1" style="max-height: 380px;" id="player-playlist-container">
+                                <!-- Dynamic Module/Lesson Playlist checklist injected here -->
+                            </div>
+                        </div>
+
+                        <!-- Quiz / Certificate CTA box -->
+                        <div id="player-quiz-cta-container">
+                            <!-- Dynamic Quiz/Certificate prompt loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- --- Footer (Sleek Dark Accent) --- -->
+    <footer class="bg-slate-900 text-slate-400 py-10 mt-16 border-t border-slate-800">
+        <div class="container mx-auto px-4 text-left">
+            <div class="row g-4 align-items-center justify-content-between">
+                <div class="col-md-5">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <div class="w-8 h-8 rounded-lg gradient-bg d-flex align-items-center justify-content-center text-white">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <span class="text-lg font-black tracking-tight text-white">EduStream</span>
+                    </div>
+                    <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
+                        An interactive premium e-learning experience combining Bootstrap component systems with modern utility layouts. Track progress and claim verifiable graduation diplomas.
+                    </p>
+                </div>
+                
+                <div class="col-md-4 text-md-end">
+                    <p class="text-xs font-bold text-slate-300 mb-2">Powered by</p>
+                    <div class="d-flex justify-content-md-end gap-3 text-sm flex-wrap text-slate-400">
+                        <span><i class="fa-brands fa-html5 text-orange-500"></i> HTML5</span>
+                        <span><i class="fa-brands fa-css3-alt text-blue-500"></i> CSS3</span>
+                        <span><i class="fa-brands fa-js text-yellow-400"></i> JavaScript</span>
+                        <span><i class="fa-brands fa-bootstrap text-purple-500"></i> Bootstrap 5</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 mt-8 pt-6 d-flex flex-column flex-md-row justify-content-between text-xxs text-slate-500">
+                <p class="m-0">&copy; 2026 EduStream E-Learning. All rights reserved.</p>
+                <div class="d-flex gap-3 mt-2 mt-md-0">
+                    <a href="#" class="hover:text-indigo-400">Terms of Service</a>
+                    <a href="#" class="hover:text-indigo-400">Privacy Policy</a>
+                    <a href="#" class="hover:text-indigo-400">Student Support</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= MODALS & POPUPS ================= -->
+
+    <!-- 1. COURSE DETAILS MODAL (Bootstrap Modal) -->
+    <div class="modal fade" id="courseDetailsModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 overflow-hidden">
+                <div class="modal-header">
+                    <h5 class="modal-title font-black text-base" id="courseModalLabel">Course Details</h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4" id="courseModalBody">
+                    <!-- Injected dynamically by showCourseDetails() -->
+                </div>
+                <div class="modal-footer p-3">
+                    <button type="button" class="btn btn-outline-secondary rounded-xl font-bold text-xs px-4 py-2" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary font-bold text-xs rounded-xl px-4 py-2" id="courseModalEnrollBtn">Enroll Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. INTERACTIVE QUIZ MODAL (Bootstrap Modal) -->
+    <div class="modal fade" id="quizModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="quizModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 overflow-hidden">
+                <div class="modal-header">
+                    <h5 class="modal-title font-black text-base" id="quizModalLabel">Graduation Quiz</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4 text-center" id="quizModalBody">
+                    <!-- Injected dynamically by Quiz Engine -->
+                </div>
+                <div class="modal-footer p-3" id="quizModalFooter">
+                    <button type="button" class="btn btn-outline-secondary rounded-xl font-bold text-xs px-4 py-2" data-bs-dismiss="modal">Exit Quiz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. CERTIFICATE PRESENTATION MODAL (Bootstrap Modal) -->
+    <div class="modal fade" id="certificateModal" tabindex="-1" aria-labelledby="certificateModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 overflow-hidden">
+                <div class="modal-header">
+                    <h5 class="modal-title font-black text-base" id="certificateModalLabel"><i class="fa-solid fa-ribbon text-warning"></i> Graduation Certificate</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4 text-center">
+                    <div id="certificate-print-area">
+                        <!-- Printed dynamically by openCertificateModal() -->
+                    </div>
+                </div>
+                <div class="modal-footer p-3">
+                    <button type="button" class="btn btn-outline-secondary rounded-xl font-bold text-xs px-4 py-2" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary rounded-xl font-bold text-xs px-4 py-2 border-0 gradient-bg" onclick="printCertificate()"><i class="fa-solid fa-print"></i> Print Credential</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- --- Dynamic Toast Notifications Container --- -->
+    <div id="toast-container" class="position-fixed bottom-4 end-4 z-50 d-flex flex-column gap-2" style="max-width: 380px;"></div>
+
+    <!-- Bootstrap Bundle JS with Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Core App Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
